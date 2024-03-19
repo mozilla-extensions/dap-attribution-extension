@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <title>Source Website</title>
+  <body>
+    <h1>This is a Source Website</h1>
+    <p>This website simulates calling an ad server, displaying an ad, and recording impressions/clicks.</p>
+    <button></button>
+  </body>
+  <script>
+    const winningAd = callAdServer();
+
+    console.log("Ad Selected", winningAd);
+
+    // Get button and set name
+    let btn = document.querySelector('button');
+    btn.innerText = `Click ${winningAd.ad.name} Ad!`;
+    btn.onclick = () => {
+      clickAd(winningAd);
+    }
+
+    // BELOW IS CODE AD SUPPLIERS MUST IMPLEMENT
+
+    reportImpression(winningAd);
+
+    function reportImpression(ad) {
+        // Track impression/view
+        triggerEvent(ad.attribution.impression);
+    }
+
+    // Track click and redirect
+    function clickAd(ad) {
+      // Custom event triggered from extension, can be used for redirecting url and not failing in JS
+      window.addEventListener("fx-attribution-complete", (e) => window.open(ad.ad.url), false);
+
+      // Track click
+      triggerEvent(ad.attribution.click);
+    }
+
+
+    function triggerEvent(detail) {
+      window.dispatchEvent(
+        new CustomEvent("fx-attribution", { detail })
+      );
+    }
+
+
+    // This is an example response from an ad server.
+    function callAdServer() {
+      // Ads json from GCP for dev environment / proof of concept.
+      // Also an example of data that would be provided by ad server to websites.
+      var ads = [
+        {
+          placementId: "plc1",
+          advertiserName: "Advertiser",
+          adId: "ad1",
+          adName: "Shoes",
+          adImage: "todo",
+          taskId: "task1",
+          taskIndex: 0,
+          taskSize: 5,
+          conversionKey: "key1",
+        },
+        {
+          placementId: "plc2",
+          advertiserName: "Advertiser",
+          adId: "ad2",
+          adName: "Gloves",
+          adImage: "todo",
+          taskId: "task1",
+          taskIndex: 1,
+          taskSize: 5,
+          conversionKey: "key2",
+        },
+        {
+          placementId: "plc3",
+          advertiserName: "Advertiser",
+          adId: "ad3",
+          adName: "Hat",
+          adImage: "todo",
+          taskId: "task2",
+          taskIndex: 0,
+          taskSize: 5,
+          conversionKey: "key3",
+        },
+        {
+          placementId: "plc4",
+          advertiserName: "Advertiser",
+          adId: "ad3",
+          adName: "Socks",
+          adImage: "todo",
+          taskId: "task2",
+          taskIndex: 1,
+          taskSize: 5,
+          conversionKey: "key3",
+        },
+      ];
+
+      // Select a random ad
+      const selectedAd = ads[Math.floor(Math.random() * ads.length)];
+
+      const attrObj = {
+          taskId: selectedAd.taskId,
+          taskIndex: selectedAd.taskIndex,
+          taskSize: selectedAd.taskSize,
+          key: selectedAd.conversionKey,
+      };
+
+      // Example ad server response
+      return {
+        ad: {
+          id: selectedAd.adId,
+          name: selectedAd.adName,
+          url: `file:///Users/bbirdsong/repos/ads-attribution-extension/websites/target.html?product=${selectedAd.adName.toLowerCase()}`,
+        },
+        attribution: {
+          impression: window.btoa(JSON.stringify({ measurement: "impression", ...attrObj })),
+          click: window.btoa(JSON.stringify({ measurement: "click", ...attrObj })),
+        }
+      };
+    }
+  </script>
+</html>

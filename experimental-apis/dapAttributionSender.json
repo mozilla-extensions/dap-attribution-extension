@@ -1,0 +1,40 @@
+[
+  {
+    "namespace": "dapAttributionSender",
+    "description": "Experimental API extension to allow access to DAP sending functionality",
+    "functions": [
+      {
+        "name": "sendDapReport",
+        "type": "function",
+        "description": "Send reports to DAP",
+        "parameters": [
+          {
+            "name": "task",
+            "type": "object",
+            "description": "The task for the report to be sent",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "time_precision": {
+                "type": "number"
+              },
+              "measurement_type": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "measurement",
+            "type": "array",
+            "description": "The measurement for the task",
+            "items": {
+              "type": "number"
+            }
+          }
+        ],
+        "async": true
+      }
+    ]
+  }
+]

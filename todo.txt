@@ -1,0 +1,45 @@
+// These are my general todo notes to finalize the extension code
+
+// TODO: Clean up CONSOLE.LOGS so Hobert can use those to Demo
+
+// TODO: Make generic, so other tasks / use cases can use this ext??
+// Would have to make enum for tasks / get them from http endpoint
+// Each task could define, # of measurements/order/type (source/target), send interval, time window for attribution, etc.
+
+//events.js
+// handleEvent
+
+    // TODO: need to prevent multiple / fraud events (imp, click, and conversions)
+    // TODO: Prevent DDOS?? Retain a cache of key to count for a short interval?
+
+    // TODO: Add any more features outlined in design doc (read again in case you missed something)
+
+    // TODO: Add an exclusion list? source and target lists that are allowed?
+        - list will get long though, would need background work to verify/reset events
+        - handle verifying events? Could use jwt tokens signed by server? YES and include max counts and timeouts
+
+// handleSourceEvent
+
+
+
+// handleTargetEvent
+
+
+
+//background.js
+    // TODO: Update interval to send reports to dap
+
+
+//dap.JS
+//sendReports
+        // TODO: Reset dapmap counts to 0.
+        // TODO: Remove old dapmap entries. (last source event > 30 days)
+
+//sendToDap
+    //TODO: Add variance to sending reports, i.e. random +/- to send interval
+
+//shared.js
+    // TODO: Need to pick threshold window
+
+    // TODO: Need to evaluate race condition in map access
+    // Note: https://developer.mozilla.org/en-US/docs/Web/API/Lock

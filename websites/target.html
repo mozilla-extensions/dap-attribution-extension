@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<title>Target Website</title>
+<body>
+    <h1>This is a Target Website</h1>
+    <button></button>
+    <p></p>
+</body>
+<script>
+    // Get url params to show the expected product
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product'); // Used to show product page, apart of the ad url.
+    const product = getProductAndKey(productId);
+
+    // Get button and set name and onclick
+    let btn = document.querySelector('button');
+    btn.innerText = `Purchase ${product.name}`;
+    btn.onclick = () => {
+        registerConversion(product.key);
+
+        let p = document.querySelector('p');
+        p.innerText = `Thank you for purchasing the ${product.name}!`;
+    }
+
+
+    // BELOW IS CODE ADVERTISER MUST ADD TO PAGE
+
+    function registerConversion(detail) {
+        window.dispatchEvent(
+            new CustomEvent('fx-attribution', { detail })
+        );
+    }
+
+    // Example mechanism for target websites to get the conversion key.
+    function getProductAndKey(item) {
+        const products = {
+            shoes: ["Shoes", "key1"],
+            gloves: ["Gloves", "key2"],
+            hat: ["Hat", "key3"],
+            socks: ["Socks", "key3"],
+        }
+
+        return {
+            name: products[item][0],
+            key: window.btoa(JSON.stringify({
+                measurement: "conversion",
+                keys: [products[item][1]]
+            }))
+        };
+    }
+</script>
+</html>

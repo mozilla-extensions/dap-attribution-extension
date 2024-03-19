@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Privacy Measurement Attribution",
+  "version": "1.0",
+  "description": "Reports attribution actions through the Distributed Aggregated Protocol.",
+  "icons": {
+    "48": "icons/placeholder.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dap@mozilla.org"
+    }
+  },
+  "experiment_apis": {
+    "dapAttributionSender": {
+      "schema": "experimental-apis/dapAttributionSender.json",
+      "parent": {
+        "scopes": [
+          "addon_parent"
+        ],
+        "script": "experimental-apis/dapAttributionSender.js",
+        "paths": [
+          [
+            "dapAttributionSender"
+          ]
+        ]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/shared.js",
+        "lib/attribution.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/shared.js",
+      "lib/dap.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "alarms"
+  ]
+}
