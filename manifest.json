@@ -8,7 +8,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "dap@mozilla.org"
+      "id": "dap-attribution-extension@mozilla.org"
     }
   },
   "experiment_apis": {
