@@ -1,14 +1,18 @@
 // These are my general todo notes to finalize the extension code
 
-// TODO: Clean up CONSOLE.LOGS so Hobert can use those to Demo
+// TODO: Add Popup that shows totals for transparency / demo'ing
 
+// TODO: Make Task/Vector configurable, get configuration from file/json endpoint
+        - This will make it easier to add different journeys
+        - Need Task Type, i.e. Ads, Sign In, etc.
+        - Then config will tell how to assign the vector for the task
 // TODO: Make generic, so other tasks / use cases can use this ext??
 // Would have to make enum for tasks / get them from http endpoint
 // Each task could define, # of measurements/order/type (source/target), send interval, time window for attribution, etc.
 
+
 //events.js
 // handleEvent
-
     // TODO: need to prevent multiple / fraud events (imp, click, and conversions)
     // TODO: Prevent DDOS?? Retain a cache of key to count for a short interval?
 
@@ -18,28 +22,10 @@
         - list will get long though, would need background work to verify/reset events
         - handle verifying events? Could use jwt tokens signed by server? YES and include max counts and timeouts
 
-// handleSourceEvent
-
-
-
-// handleTargetEvent
-
-
-
-//background.js
-    // TODO: Update interval to send reports to dap
-
-
-//dap.JS
-//sendReports
-        // TODO: Reset dapmap counts to 0.
-        // TODO: Remove old dapmap entries. (last source event > 30 days)
-
-//sendToDap
-    //TODO: Add variance to sending reports, i.e. random +/- to send interval
 
 //shared.js
-    // TODO: Need to pick threshold window
-
-    // TODO: Need to evaluate race condition in map access
+    // TODO: Race conditions should be minimal, if any, but read up on locks API Below
+    // it's based on origin, so should work for same page, but not multiple, which should be fine
+    // since the MAIN issue is multiple impressions for the same convkey on the same page load
+    // OR An action occurred while DAP was sending
     // Note: https://developer.mozilla.org/en-US/docs/Web/API/Lock

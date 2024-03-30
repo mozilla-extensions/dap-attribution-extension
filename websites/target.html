@@ -32,12 +32,12 @@
 
     // Example mechanism for target websites to get the conversion key.
     function getProductAndKey(item) {
-        const products = {
-            shoes: ["Shoes", "key1"],
-            gloves: ["Gloves", "key2"],
-            hat: ["Hat", "key3"],
-            socks: ["Socks", "key3"],
-        }
+        const products = Array.from({length: 10}, (_, i) => ({
+            ["product " + (i + 1)]: ["Product " + (i + 1), "key" + (i + 1)]
+        })).reduce((prev, curr) => {
+            Object.assign(prev, curr);
+            return prev;
+        }, {});
 
         return {
             name: products[item][0],
