@@ -1,6 +1,7 @@
 (async () => {
     const container = document.querySelector("#records");
     const sendInterval = document.querySelector("#sendInterval");
+    const expireInterval = document.querySelector("#expireInterval");
     const sendNow = document.querySelector("#sendNow");
     const logs = document.querySelector("#logs");
 
@@ -22,6 +23,27 @@
         } else {
             updatelogs("Invalid Interval");
             sendInterval.value = curInterval;
+        }
+    });
+
+    let storedExpire = await browser.storage.session.get("expire");
+    let curExpire = storedExpire.expire ?? RECORD_EXPIRATION_DAYS;
+    expireInterval.value = curExpire;
+    expireInterval.addEventListener('change', (e) => {
+        const interval = parseFloat(e.target.value);
+        if (!isNaN(interval)) {
+            updatelogs("Updating expiration...");
+            send({
+                type: "update-expiration",
+                expiration: interval
+            }, () => {
+                curExpire = interval;
+                browser.storage.session.set({ expire: interval });
+                updatelogs("Update complete!");
+            });
+        } else {
+            updatelogs("Invalid Expiration");
+            expireInterval.value = curExpire;
         }
     });
 
@@ -47,6 +69,12 @@
 
     async function updateRecords() {
         const keyRecords = await getRecordsByKey();
+
+        if (Object.entries(keyRecords).length === 0) {
+            container.innerHTML = `<tr>No records exist.</tr>`;
+            return;
+        }
+
         let header = "<th>key</th>";
         for (const [measurement, props] of Object.entries(MEASUREMENTS)) {
             header += `<th>${measurement}</th>`;

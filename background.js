@@ -20,6 +20,8 @@ if (!browser.extension.inIncognitoContext) {
         } else if (request.type === "update-interval") {
             browser.alarms.clearAll();
             browser.alarms.create({ periodInMinutes: request.interval });
+        } else if (request.type === "update-expiration") {
+            RECORD_EXPIRATION_MILLI = request.expiration * (1000 * 60 * 60 * 24)
         }
 
         if (complete) {
