@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Privacy Measurement Attribution",
+  "name": "Mozilla Privacy Attribution",
   "version": "1.0",
   "description": "Reports attribution actions through the Distributed Aggregated Protocol.",
-  "icons": {
-    "48": "icons/placeholder.png"
+  "action": {
+    "default_title": "Mozilla Privacy Attribution",
+    "default_popup": "popup/monitoring.html"
   },
   "browser_specific_settings": {
     "gecko": {

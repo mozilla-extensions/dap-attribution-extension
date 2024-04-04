@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="monitoring.css"></link>
+    </head>
+    <body>
+        <div><strong>Mozilla Privacy Attribution</strong></div>
+        <hr>
+        <div>
+            <div>Report Interval (in minutes)</div>
+            <input id="sendInterval" type="number" />
+            <button id="sendNow">Send Now</button>
+        </div>
+
+        <hr>
+
+        <div>Logs</div>
+        <textarea id="logs"></textarea>
+
+        <hr>
+
+        <div>Local Records</div>
+        <table id="records"></table>
+        <script src="../lib/shared.js"></script>
+        <script src="monitoring.js"></script>
+    </body>
+</html>
