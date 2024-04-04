@@ -1,11 +1,6 @@
 Private Attribution Web Extension
 ================================
 
-Design Document: https://docs.google.com/document/d/1lUIMtKuTGtJuuZNXwZ9BOdvWjryfn1c_d8zDbg28TY0
-
-This web extension is a proof of concept based on the web extension defined in the linked design document.
-
-
 Usage
 -----
 
