@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./style/protocol-components.css"></link>
+        <link rel="stylesheet" href="./style/protocol.css"></link>
+        <link rel="stylesheet" href="index.css"></link>
+    </head>
+    <body>
+        <h3>Mozilla Privacy Attribution</h3>
+
+        <table id="records" class="mzp-u-data-table"></table>
+
+        <label for="logs">Logs</label>
+        <textarea name="logs" id="logs" rows="5"></textarea>
+
+        <div>
+            <label for="sendInterval">Report Interval (in minutes)</label>
+            <input type="number" id="sendInterval" name="sendInterval">
+
+            <button id="sendBtn" class="mzp-c-button" type="button">Send Now</button>
+        </div>
+
+        <div>
+            <label for="expireInterval">Record Expiration Days</label>
+            <input type="number" id="expireInterval" name="expireInterval">
+        </div>
+
+        <script src="../lib/shared.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

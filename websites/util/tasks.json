@@ -1,0 +1,22 @@
+[
+    {
+        "task_id": "hYycR_j0VUxBzS2MWi_mIKbMsTX2ZaGaIVvr03zPTt8",
+        "metric_type": "vector",
+        "vdaf_args_structured": {
+            "length": 15,
+            "bits": 8
+        },
+        "vdaf": "sumvec",
+        "hpke_config": "pgAgAAEAAQAgUVSMqRU71_ymSwchSIpCgMLSj7_nFAhGiwv2PA4ZECM"
+    },
+    {
+        "task_id": "v17q4Bdx5Dv56Dk1isHE6BqfN9R9zAUWYWiWMC3rYyQ",
+        "metric_type": "vector",
+        "vdaf_args_structured": {
+            "length": 15,
+            "bits": 8
+        },
+        "vdaf": "sumvec",
+        "hpke_config": "pgAgAAEAAQAgUVSMqRU71_ymSwchSIpCgMLSj7_nFAhGiwv2PA4ZECM"
+    }
+]

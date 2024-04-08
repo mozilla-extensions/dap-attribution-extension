@@ -5,12 +5,15 @@
   "description": "Reports attribution actions through the Distributed Aggregated Protocol.",
   "action": {
     "default_title": "Mozilla Privacy Attribution",
-    "default_popup": "popup/monitoring.html"
+    "default_popup": "popup/index.html"
   },
   "browser_specific_settings": {
     "gecko": {
       "id": "dap-attribution-extension@mozilla.org"
     }
+  },
+  "icons": {
+    "48": "icons/moz-fav-bw-rgb.png"
   },
   "experiment_apis": {
     "dapAttributionSender": {

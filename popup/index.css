@@ -1,0 +1,20 @@
+body {
+    padding: .5rem;
+}
+
+input[type="number"] {
+    min-width: 100px;
+    width: 60%;
+}
+
+button {
+    width: 39%;
+}
+
+div, table, textarea {
+    width: 100%;
+}
+
+div {
+    white-space: nowrap;
+}
