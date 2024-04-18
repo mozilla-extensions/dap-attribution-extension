@@ -9,7 +9,6 @@ if (!browser.extension.inIncognitoContext) {
         await handleEvent();
 
         send("Send Complete!");
-
     });
 
     browser.runtime.onMessage.addListener(async (request, sender, complete) => {
@@ -19,9 +18,9 @@ if (!browser.extension.inIncognitoContext) {
             await handleEvent();
         } else if (request.type === "update-interval") {
             browser.alarms.clearAll();
-            browser.alarms.create({ periodInMinutes: request.interval });
+            browser.alarms.create({ periodInMinutes: request.Interval });
         } else if (request.type === "update-expiration") {
-            RECORD_EXPIRATION_MILLI = request.expiration * (1000 * 60 * 60 * 24)
+            RECORD_EXPIRATION_MILLI = request.Expiration * (1000 * 60 * 60 * 24)
         }
 
         if (complete) {

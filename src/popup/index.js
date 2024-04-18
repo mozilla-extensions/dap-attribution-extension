@@ -39,16 +39,16 @@
     drawRecords();
 
     async function updateValue(e, type, key) {
-        const interval = parseFloat(e.target.value);
-        if (!isNaN(interval)) {
+        const val = parseFloat(e.target.value);
+        if (!isNaN(val)) {
             updatelogs(`Updating ${key}...`);
             send(
                 {
                     type: type,
-                    expiration: interval,
+                    [key]: val,
                 },
                 () => {
-                    browser.storage.session.set({ [key]: interval });
+                    browser.storage.session.set({ [key]: val });
                     updatelogs("Update complete!");
                 }
             );

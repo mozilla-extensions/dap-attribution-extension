@@ -15,43 +15,45 @@ advertisers.forEach((a) => {
 
 let ads = [];
 let i = 0;
+let lastTaskIdIndex = 0;
 placements.forEach((plc) => {
   let curAdvAdIMap = {};
   advertisers.forEach((a) => {
     curAdvAdIMap[a] = 0;
   });
-  tasks.forEach((t) => {
-    for (let tI = 0; tI < taskSize; tI++) {
-      const curAdv = advertisers[i % advertisers.length];
-      const curAdvAds = advAds[curAdv];
-      const curAd = curAdvAds[curAdvAdIMap[curAdv]++];
-      const plcAd = getPlcAd(plc, curAdv, curAd, curAd, "", t, tI, curAd);
-      const attrObj = {
-        taskId: plcAd.taskId,
-        taskIndex: plcAd.taskIndex,
-        taskSize: plcAd.taskSize,
-        key: plcAd.conversionKey,
-      };
-      ads.push({
-        plc: {
-          id: plcAd.placementId
-        },
-        ad: {
-          id: plcAd.adId,
-          name: plcAd.adName,
-          url: plcAd.adUrl,
-        },
-        att: {
-          imp: btoa(
-            JSON.stringify({ measurement: "impression", ...attrObj })
-          ),
-          cl: btoa(JSON.stringify({ measurement: "click", ...attrObj })),
-        },
-        // debug: plcAd,
-      });
-      i++;
-    }
-  });
+
+  for (let tI = 0; tI < taskSize; tI++) {
+    const taskId = tasks[lastTaskIdIndex % tasks.length]
+    lastTaskIdIndex++;
+    const curAdv = advertisers[i % advertisers.length];
+    const curAdvAds = advAds[curAdv];
+    const curAd = curAdvAds[curAdvAdIMap[curAdv]++];
+    const plcAd = getPlcAd(plc, curAdv, curAd, curAd, "", taskId, tI, curAd);
+    const attrObj = {
+      taskId: plcAd.taskId,
+      taskIndex: plcAd.taskIndex,
+      taskSize: plcAd.taskSize,
+      key: plcAd.conversionKey,
+    };
+    ads.push({
+      plc: {
+        id: plcAd.placementId
+      },
+      ad: {
+        id: plcAd.adId,
+        name: plcAd.adName,
+        url: plcAd.adUrl,
+      },
+      att: {
+        imp: btoa(
+          JSON.stringify({ measurement: "impression", ...attrObj })
+        ),
+        cl: btoa(JSON.stringify({ measurement: "click", ...attrObj })),
+      },
+      debug: plcAd,
+    });
+    i++;
+  }
 });
 
 console.log(JSON.stringify(ads));
